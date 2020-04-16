@@ -10,7 +10,10 @@ const makeTransaction = transaction => {
       const canProcess = Math.random() > 0.3;
 
       if (canProcess) {
-        resolve([transaction.id, delay]);
+        resolve({
+          id: transaction.id,
+          time: delay,
+        });
       }
 
       reject(transaction.id);
@@ -18,8 +21,8 @@ const makeTransaction = transaction => {
   });
 };
 
-const logSuccess = id => {
-  console.log(`Transaction ${id[0]} processed in ${id[1]} ms`);
+const logSuccess = object => {
+  console.log(`Transaction ${object.id} processed in ${object.time} ms`);
 };
 
 const logError = id => {
